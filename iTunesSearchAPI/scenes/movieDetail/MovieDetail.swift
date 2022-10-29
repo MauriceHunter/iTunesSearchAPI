@@ -11,7 +11,6 @@ import AVKit
 struct MovieDetail: View {
     
     @EnvironmentObject var detailedId: SearchView.MovieIdDetails
-    
     @State private var results = [Result]()
     
     var body: some View {
@@ -43,9 +42,9 @@ struct MovieDetail: View {
                         Spacer()
                         VStack(alignment: .leading){
                             Text("Purchase Price")
-                            Text("$\(doubleUnwrap(doubleOne: item.trackHdPrice, doubleTwo: item.trackPrice), specifier: "%.2f")")
+                            Text("$\(Double.doubleUnwrap(doubleOne: item.trackHdPrice, doubleTwo: item.trackPrice), specifier: "%.2f")")
                             Text("Rating: \(item.contentAdvisoryRating)")
-                            Text("Runtime: \(intUnwrap(millisecond:item.trackTimeMillis)) minutes")
+                            Text("Runtime: \(Int.intUnwrap(millisecond:item.trackTimeMillis)) minutes")
                         }
                     }
                     Divider()
@@ -76,9 +75,8 @@ struct MovieDetail: View {
             await loadData()
         }
     }
-    
-    
-    
+
+    //TODO cut this url if its not being used
     //https://itunes.apple.com/lookup?id=
     
     func loadData() async {
@@ -93,26 +91,6 @@ struct MovieDetail: View {
             results = decodedResponse.results
         } catch {
             print(error)
-        }
-    }
-    
-    
-    func doubleUnwrap(doubleOne: Double?, doubleTwo: Double?) -> Double{
-        let hdPrice = doubleOne
-        let sdPrice = doubleTwo
-        if hdPrice != nil {
-            return hdPrice ?? 0.0
-        } else {
-            return sdPrice ?? 0.0
-        }
-    }
-    
-    func intUnwrap(millisecond: Int?) -> Int{
-        let videoMilli = millisecond
-        if videoMilli != nil {
-            return (videoMilli! / 60000)
-        } else {
-            return 0
         }
     }
 }
