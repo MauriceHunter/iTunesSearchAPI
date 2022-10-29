@@ -42,9 +42,9 @@ struct TopTenMovieDetail: View {
                         Spacer()
                         VStack(alignment: .leading){
                             Text("Purchase Price")
-                            Text("$\(doubleUnwrap(doubleOne: item.trackHdPrice, doubleTwo: item.trackPrice), specifier: "%.2f")")
+                            Text("$\(Double.doubleUnwrap(doubleOne: item.trackHdPrice, doubleTwo: item.trackPrice), specifier: "%.2f")")
                             Text("Rating: \(item.contentAdvisoryRating)")
-                            Text("Runtime: \(intUnwrap(millisecond:item.trackTimeMillis)) minutes")
+                            Text("Runtime: \(Int.intUnwrap(millisecond:item.trackTimeMillis)) minutes")
                         }
                     }
                     Divider()
@@ -94,28 +94,7 @@ struct TopTenMovieDetail: View {
             print(error)
         }
     }
-    
-    func doubleUnwrap(doubleOne: Double?, doubleTwo: Double?) -> Double{
-        let hdPrice = doubleOne
-        let sdPrice = doubleTwo
-        if hdPrice != nil {
-            return hdPrice ?? 0.0
-        } else {
-            return sdPrice ?? 0.0
-        }
-    }
-    
-    func intUnwrap(millisecond: Int?) -> Int{
-        let videoMilli = millisecond
-        if videoMilli != nil {
-            return (videoMilli! / 60000)
-        } else {
-            return 0
-        }
-    }
 }
-
-
 
 struct TopTenMovieDetail_Previews: PreviewProvider {
     static var previews: some View {

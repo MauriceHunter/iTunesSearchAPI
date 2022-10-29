@@ -17,4 +17,13 @@ extension Int {
             return 404
         }
     }
+
+    public static func intUnwrap(millisecond: Int?) -> Int{
+        let videoMilli = millisecond
+        if videoMilli != nil {
+            return (videoMilli! / 60000)
+        } else {
+            return 0
+        }
+    }
 }
