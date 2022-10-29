@@ -11,16 +11,14 @@ import SwiftUI
 
 
 struct TopTen: View {
-    
-    //@State public var topTenResults = [Entry]()
+
     let columns: [GridItem] = [
         GridItem(.flexible(), alignment: .top),
         GridItem(.flexible(), alignment: .top)
     ]
 
     @StateObject var vm = TopTen.ViewModel()
-
-    @StateObject var movieIdDetailsForNewView = MovieIdDetails()
+    @StateObject var movieIdDetailsForNewView = MovieIdDetails() // TODO: move this into VM
     
     var body: some View {
         NavigationView{
