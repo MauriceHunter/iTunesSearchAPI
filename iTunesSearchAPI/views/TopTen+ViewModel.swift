@@ -8,29 +8,22 @@
 import SwiftUI
 
 extension TopTen {
-    public func stringToInt(idString: String) -> Int {
-        let convertedString = Int(idString)
+    @MainActor public final class ViewModel: ObservableObject {
+        @Published public var topTenResults = [Entry]()
 
-        if convertedString != nil {
-            return convertedString!
-        } else {
-            return 404
+        public func loadData() async {
+            guard let url = URL(string: "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topMovies/json")
+            else {
+                print("URL Issue")
+                return
+            }
+            do {
+                let (data, _) = try await URLSession.shared.data(from: url)
+                let decodedResponse = try JSONDecoder().decode(TopMovies.self, from: data)
+                topTenResults = decodedResponse.feed.entry.self
+            } catch {
+                print(error)
+            }
         }
     }
-
-    public func loadData() async {
-        guard let url = URL(string: "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topMovies/json")
-        else {
-            print("URL Issue")
-            return
-        }
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let decodedResponse = try JSONDecoder().decode(TopMovies.self, from: data)
-            topTenResults = decodedResponse.feed.entry.self
-        } catch {
-            print(error)
-        }
-    }
-
 }
