@@ -12,7 +12,7 @@ import SwiftUI
 
 struct TopTen: View {
     
-    @State private var topTenResults = [Entry]()
+    @State public var topTenResults = [Entry]()
     let columns: [GridItem] = [
         GridItem(.flexible(), alignment: .top),
         GridItem(.flexible(), alignment: .top)
@@ -82,30 +82,6 @@ struct TopTen: View {
         @Published var movieId: Int = 0
     }
     
-    func stringToInt(idString: String) -> Int {
-        let convertedString = Int(idString)
-        
-        if convertedString != nil {
-            return convertedString!
-        } else {
-            return 404
-        }
-    }
-    
-    func loadData() async {
-        guard let url = URL(string: "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topMovies/json")
-        else {
-            print("URL Issue")
-            return
-        }
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let decodedResponse = try JSONDecoder().decode(TopMovies.self, from: data)
-            topTenResults = decodedResponse.feed.entry.self
-        } catch {
-            print(error)
-        }
-    }
 }
 
 struct TopTen_Previews: PreviewProvider {
