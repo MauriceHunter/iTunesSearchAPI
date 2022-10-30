@@ -12,7 +12,8 @@ struct TopTenMovieDetail: View {
     
     @EnvironmentObject var detailedId: TopTen.MovieIdDetails
     @State private var results = [Result]()
-    
+
+    // TODO: We need to break out the View below into SubViews where it makes sense so we can have some re-use
     var body: some View {
         ScrollView{
             ForEach(results, id: \.trackId){ item in
@@ -41,10 +42,10 @@ struct TopTenMovieDetail: View {
                         }
                         Spacer()
                         VStack(alignment: .leading){
-                            Text("Purchase Price")
-                            Text("$\(doubleUnwrap(doubleOne: item.trackHdPrice, doubleTwo: item.trackPrice), specifier: "%.2f")")
+                            Text("Purchase Price") //TODO: these need to be localised strings
+                            Text("$\(Double.doubleUnwrap(doubleOne: item.trackHdPrice, doubleTwo: item.trackPrice), specifier: "%.2f")")
                             Text("Rating: \(item.contentAdvisoryRating)")
-                            Text("Runtime: \(intUnwrap(millisecond:item.trackTimeMillis)) minutes")
+                            Text("Runtime: \(Int.intUnwrap(millisecond:item.trackTimeMillis)) minutes")
                         }
                     }
                     Divider()
@@ -75,11 +76,9 @@ struct TopTenMovieDetail: View {
             await loadData()
         }
     }
-    
-    
-    
+
     //https://itunes.apple.com/lookup?id=
-    
+    // TODO: move this func to the Viewmodel
     func loadData() async {
         guard let url = URL(string: "https://itunes.apple.com/lookup?id=\(detailedId.movieId)")
         else {
@@ -94,28 +93,7 @@ struct TopTenMovieDetail: View {
             print(error)
         }
     }
-    
-    func doubleUnwrap(doubleOne: Double?, doubleTwo: Double?) -> Double{
-        let hdPrice = doubleOne
-        let sdPrice = doubleTwo
-        if hdPrice != nil {
-            return hdPrice ?? 0.0
-        } else {
-            return sdPrice ?? 0.0
-        }
-    }
-    
-    func intUnwrap(millisecond: Int?) -> Int{
-        let videoMilli = millisecond
-        if videoMilli != nil {
-            return (videoMilli! / 60000)
-        } else {
-            return 0
-        }
-    }
 }
-
-
 
 struct TopTenMovieDetail_Previews: PreviewProvider {
     static var previews: some View {

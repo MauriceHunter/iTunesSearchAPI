@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct SearchView: View {
-    
+
+    // TODO: these should be in a ViewModel
     @State private var results = [Result]()
     @State private var searchTerm = ""
     @State var newView = false
     @StateObject var movieIdDetailsForNewView = MovieIdDetails()
     
-
+    // TODO like this other View, these views need the common UI Elements extracted.
     var body: some View {
             NavigationView{
                 ScrollView{
@@ -48,7 +49,7 @@ struct SearchView: View {
                                         Text("Directed by \(item.artistName)".uppercased())
                                             .font(.caption)
                                             .foregroundColor(.secondary)
-                                        Text("$\(doubleUnwrap(doubleOne: item.trackHdPrice, doubleTwo: item.trackPrice), specifier: "%.2f")")
+                                        Text("$\(Double.doubleUnwrap(doubleOne: item.trackHdPrice, doubleTwo: item.trackPrice), specifier: "%.2f")")
                                         
                                     }
                                     .layoutPriority(100)
@@ -80,18 +81,18 @@ struct SearchView: View {
             .environmentObject(movieIdDetailsForNewView)
         
     }
-    
-    class MovieIdDetails: ObservableObject{
+
+    class MovieIdDetails: ObservableObject{ //TODO - carefull of the spacing should be single spave befrore {
         @Published var movieId: Int = 0
     }
-    
-    func noSpace(searchTerm: String) -> String{
+
+    //TODO: Move this into String+extension
+    func noSpace(searchTerm: String) -> String{ //TODO - carefull of the spacing should be single spave befrore {
         let newTerm = searchTerm.replacingOccurrences(of: " ", with: "+")
         return newTerm
     }
     
-    
-    
+    // TODO: Move this into the VM
     func loadData() async {
         guard let url = URL(string: "https://itunes.apple.com/search?term=\(noSpace(searchTerm: searchTerm))&entity=movie")
         else {
@@ -106,18 +107,6 @@ struct SearchView: View {
             print(error)
         }
     }
-    
-    func doubleUnwrap(doubleOne: Double?, doubleTwo: Double?) -> Double{
-        let hdPrice = doubleOne
-        let sdPrice = doubleTwo
-        if hdPrice != nil {
-            return hdPrice ?? 0.0
-        } else {
-            return sdPrice ?? 0.0
-        }
-    }
-    
-    
 }
 
 struct SearchView_Previews: PreviewProvider {

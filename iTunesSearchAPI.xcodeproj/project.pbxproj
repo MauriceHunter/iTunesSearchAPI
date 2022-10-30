@@ -18,6 +18,10 @@
 		83DB12AB290CCC22004EB056 /* TopTen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DB12AA290CCC22004EB056 /* TopTen.swift */; };
 		83DB12AD290CCC59004EB056 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DB12AC290CCC59004EB056 /* MovieDetail.swift */; };
 		83DB12AF290CCED9004EB056 /* TopTenMovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DB12AE290CCED9004EB056 /* TopTenMovieDetail.swift */; };
+		FB8B40C7290DE0FD0025DF47 /* TopTen+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8B40C6290DE0FD0025DF47 /* TopTen+ViewModel.swift */; };
+		FB8B40CB290DE4910025DF47 /* Int+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8B40CA290DE4910025DF47 /* Int+extension.swift */; };
+		FB8B40CD290DE64A0025DF47 /* Double+extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8B40CC290DE64A0025DF47 /* Double+extention.swift */; };
+		FB8B40CF290DE7610025DF47 /* TopTenMovieDetail+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8B40CE290DE7610025DF47 /* TopTenMovieDetail+ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		83DB12AA290CCC22004EB056 /* TopTen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTen.swift; sourceTree = "<group>"; };
 		83DB12AC290CCC59004EB056 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		83DB12AE290CCED9004EB056 /* TopTenMovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTenMovieDetail.swift; sourceTree = "<group>"; };
+		FB8B40C6290DE0FD0025DF47 /* TopTen+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopTen+ViewModel.swift"; sourceTree = "<group>"; };
+		FB8B40CA290DE4910025DF47 /* Int+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+extension.swift"; sourceTree = "<group>"; };
+		FB8B40CC290DE64A0025DF47 /* Double+extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+extention.swift"; sourceTree = "<group>"; };
+		FB8B40CE290DE7610025DF47 /* TopTenMovieDetail+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopTenMovieDetail+ViewModel.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,9 +73,10 @@
 		83DB1291290CC7D2004EB056 /* iTunesSearchAPI */ = {
 			isa = PBXGroup;
 			children = (
+				FB8B40C9290DE4770025DF47 /* extensions */,
 				83DB1292290CC7D2004EB056 /* iTunesSearchAPIApp.swift */,
 				83DB1294290CC7D2004EB056 /* ContentView.swift */,
-				83DB12A1290CC801004EB056 /* views */,
+				83DB12A1290CC801004EB056 /* scenes */,
 				83DB12A0290CC7F6004EB056 /* models */,
 				83DB1296290CC7D3004EB056 /* Assets.xcassets */,
 				83DB1298290CC7D3004EB056 /* Preview Content */,
@@ -92,16 +101,59 @@
 			path = models;
 			sourceTree = "<group>";
 		};
-		83DB12A1290CC801004EB056 /* views */ = {
+		83DB12A1290CC801004EB056 /* scenes */ = {
 			isa = PBXGroup;
 			children = (
+				FB8B40D3290DE9D20025DF47 /* movieDetail */,
+				FB8B40D2290DE9AB0025DF47 /* topTenDetail */,
+				FB8B40D1290DE9980025DF47 /* search */,
+				FB8B40D0290DE9880025DF47 /* topTen */,
 				83DB12A6290CC8A3004EB056 /* HomeScreen.swift */,
-				83DB12A8290CCBE5004EB056 /* SearchView.swift */,
+			);
+			path = scenes;
+			sourceTree = "<group>";
+		};
+		FB8B40C9290DE4770025DF47 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FB8B40CA290DE4910025DF47 /* Int+extension.swift */,
+				FB8B40CC290DE64A0025DF47 /* Double+extention.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
+		FB8B40D0290DE9880025DF47 /* topTen */ = {
+			isa = PBXGroup;
+			children = (
+				FB8B40C6290DE0FD0025DF47 /* TopTen+ViewModel.swift */,
 				83DB12AA290CCC22004EB056 /* TopTen.swift */,
-				83DB12AC290CCC59004EB056 /* MovieDetail.swift */,
+			);
+			path = topTen;
+			sourceTree = "<group>";
+		};
+		FB8B40D1290DE9980025DF47 /* search */ = {
+			isa = PBXGroup;
+			children = (
+				83DB12A8290CCBE5004EB056 /* SearchView.swift */,
+			);
+			path = search;
+			sourceTree = "<group>";
+		};
+		FB8B40D2290DE9AB0025DF47 /* topTenDetail */ = {
+			isa = PBXGroup;
+			children = (
+				FB8B40CE290DE7610025DF47 /* TopTenMovieDetail+ViewModel.swift */,
 				83DB12AE290CCED9004EB056 /* TopTenMovieDetail.swift */,
 			);
-			path = views;
+			path = topTenDetail;
+			sourceTree = "<group>";
+		};
+		FB8B40D3290DE9D20025DF47 /* movieDetail */ = {
+			isa = PBXGroup;
+			children = (
+				83DB12AC290CCC59004EB056 /* MovieDetail.swift */,
+			);
+			path = movieDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,13 +227,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				83DB12AF290CCED9004EB056 /* TopTenMovieDetail.swift in Sources */,
+				FB8B40CF290DE7610025DF47 /* TopTenMovieDetail+ViewModel.swift in Sources */,
 				83DB12A3290CC83B004EB056 /* MovieModel.swift in Sources */,
 				83DB12A7290CC8A3004EB056 /* HomeScreen.swift in Sources */,
 				83DB12AB290CCC22004EB056 /* TopTen.swift in Sources */,
 				83DB1295290CC7D2004EB056 /* ContentView.swift in Sources */,
+				FB8B40CD290DE64A0025DF47 /* Double+extention.swift in Sources */,
+				FB8B40CB290DE4910025DF47 /* Int+extension.swift in Sources */,
 				83DB1293290CC7D2004EB056 /* iTunesSearchAPIApp.swift in Sources */,
 				83DB12A9290CCBE5004EB056 /* SearchView.swift in Sources */,
 				83DB12A5290CC85D004EB056 /* TopTenModel.swift in Sources */,
+				FB8B40C7290DE0FD0025DF47 /* TopTen+ViewModel.swift in Sources */,
 				83DB12AD290CCC59004EB056 /* MovieDetail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
