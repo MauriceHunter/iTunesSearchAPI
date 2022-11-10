@@ -22,40 +22,8 @@ struct SearchView: View {
                     ForEach(results, id: \.trackId){ item in
                         NavigationLink(destination: MovieDetail()){
                             VStack{
-                                AsyncImage(url: URL(string: item.artworkUrl100.replacingOccurrences(of: "100x100", with: "800x800"))) { phase in
-                                    if let image = phase.image {
-                                        image
-                                            .resizable()
-                                            .scaledToFill()
-                                    } else if phase.error != nil {
-                                        Text("there was an error loading the image")
-                                    } else {
-                                        ProgressView()
-                                    }
-                                }
-                                HStack{
-                                    VStack(alignment: .leading){
-                                        Text(item.primaryGenreName)
-                                            .font(.headline)
-                                            .foregroundColor(.secondary)
-                                        Text(item.trackName)
-                                            .font(.title)
-                                            .fontWeight(.black)
-                                            .foregroundColor(.primary)
-                                            .lineLimit(3)
-                                            .onTapGesture {
-                                                print(item.artworkUrl100)
-                                            }
-                                        Text("Directed by \(item.artistName)".uppercased())
-                                            .font(.caption)
-                                            .foregroundColor(.secondary)
-                                        Text("$\(Double.doubleUnwrap(doubleOne: item.trackHdPrice, doubleTwo: item.trackPrice), specifier: "%.2f")")
-                                        
-                                    }
-                                    .layoutPriority(100)
-                                    .padding(2)
-                                    Spacer()
-                                }
+                                SearchViewImage(imageURL: item.artworkUrl100)
+                                SearchViewDescriptiveInfo(genre: item.primaryGenreName, title: item.trackName, director: item.artistName, price: Double.doubleUnwrap(doubleOne: item.trackHdPrice, doubleTwo: item.trackPrice))
                             }
                             .cornerRadius(10)
                             .overlay(RoundedRectangle(cornerRadius: 10)

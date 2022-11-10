@@ -27,36 +27,9 @@ struct TopTen: View {
                     ForEach(vm.topTenResults, id: \.id.attributes.imID) { result in
                         NavigationLink(destination: TopTenMovieDetail()){
                             VStack{
-                                AsyncImage(url: URL(string: result.imImage.first?.label.replacingOccurrences(of: "39x60", with: "400x400").replacingOccurrences(of: "113x170", with: "400x400") ?? "https://iconsplace.com/wp-content/uploads/_icons/ffe500/256/png/error-icon-19-256.png")){ phase in
-                                    if let image = phase.image {
-                                        image
-                                            .resizable()
-                                            .scaledToFit()
-                                    } else if phase.error != nil {
-                                        Text("there was an error loading the image")
-                                    } else {
-                                        ProgressView()
-                                    }
-                                }
+                                TopTenImage(imageURL: result.imImage.first?.label ?? "image")
                                 Divider()
-                                HStack{
-                                    VStack(alignment: .leading){
-                                        Text(result.category.attributes.label)
-                                            .font(.headline)
-                                            .foregroundColor(.secondary)
-                                        Text(result.imName.label)
-                                            .font(.title)
-                                            .fontWeight(.black)
-                                            .foregroundColor(.primary)
-                                            .lineLimit(3)
-                                        Text("Directed by \(result.imArtist.label)".uppercased())
-                                            .font(.caption)
-                                            .foregroundColor(.secondary)
-                                        Text("\(result.imPrice.label)")
-                                    }
-                                    .multilineTextAlignment(.leading)
-                                    Spacer()
-                                }
+                                TopTenDescriptiveInfo(attributes: result.category.attributes.label, imName: result.imName.label, imArtist: result.imArtist.label, imPrice: result.imPrice.label)
                             }
                         }
                         .simultaneousGesture(TapGesture().onEnded { movieIdDetailsForNewView.movieId = Int.stringToInt(idString: result.id.attributes.imID)

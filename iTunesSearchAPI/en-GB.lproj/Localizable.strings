@@ -1,0 +1,6 @@
+/* currency */
+"$%.2f" = "£%.2f";
+
+/* top ten currency symbol */
+"$%@" = "£%@";
+

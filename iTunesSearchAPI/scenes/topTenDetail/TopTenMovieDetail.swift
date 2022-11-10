@@ -20,51 +20,18 @@ struct TopTenMovieDetail: View {
                 VStack{
                     HStack{
                         VStack(alignment: .leading){
-                            Text(item.trackName)
-                                .font(.title)
-                                .fontWeight(.black)
-                            Text("Directed by \(item.artistName)".uppercased())
-                                .font(.caption)
+                            MovieDetailTitleHeader(title: item.trackName, director: item.artistName)
                             Divider()
-                            AsyncImage(url: URL(string: item.artworkUrl100.replacingOccurrences(of: "100x100", with: "600x600"))) { phase in
-                                if let image = phase.image {
-                                    image
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 200)
-                                } else if phase.error != nil {
-                                    Text("there was an error loading the image")
-                                } else {
-                                    ProgressView()
-                                }
-                            }
-                            
+                            MovieDetailImage(imageURL: item.artworkUrl100)
                         }
                         Spacer()
-                        VStack(alignment: .leading){
-                            Text("Purchase Price") //TODO: these need to be localised strings
-                            Text("$\(Double.doubleUnwrap(doubleOne: item.trackHdPrice, doubleTwo: item.trackPrice), specifier: "%.2f")")
-                            Text("Rating: \(item.contentAdvisoryRating)")
-                            Text("Runtime: \(Int.intUnwrap(millisecond:item.trackTimeMillis)) minutes")
-                        }
-                    }
+                        MovieDetailDescriptiveInfo(price: Double.doubleUnwrap(doubleOne: item.trackHdPrice, doubleTwo: item.trackPrice), rating: item.contentAdvisoryRating, runtime: item.trackTimeMillis)                    }
                     Divider()
                     HStack{
                         VStack(alignment: .leading){
-                            Text("Trailer:")
-                                .font(.title)
-                                .fontWeight(.black)
-                            VideoPlayer(player: AVPlayer(url: URL(string: item.previewUrl ?? ".mp4")!))
-                                .frame(width: 300, height: 200)
-                                .shadow(color: .blue ,radius: 10)
-                                .padding()
-                            
+                            MovieDetailTrailer(trailer: item.previewUrl ?? ".mp4")
                             Divider()
-                            Text("Description:")
-                                .font(.title)
-                                .fontWeight(.black)
-                            Text(item.longDescription)
-                                .fixedSize(horizontal: false, vertical: true)
+                            MovieDetailSummary(description: item.longDescription)
                         }
                         Spacer()
                     }
